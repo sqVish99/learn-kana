@@ -1,12 +1,42 @@
-# React + Vite
+# Learn Kana
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive web application for learning Japanese writing systems: Hiragana, Katakana, and Kanji.
 
-Currently, two official plugins are available:
+![Screenshot of LearnKana](screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+- **Progressive Learning**: Practice with 10 randomly selected characters at a time
+- **Interactive Quizzes**: Choose the correct character from multiple options
+- **Audio Pronunciation**: Hear the correct pronunciation of each character
+- **Responsive Design**: Works on desktop and mobile devices
+- **Dark Mode Support**: Switch between light and dark themes
+- **Progress Tracking**: See your progress as you work through each set
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧠 Learn All Japanese Writing Systems
+
+### Hiragana (ひらがな)
+The basic phonetic script used for native Japanese words, grammar elements, and word endings.
+
+### Katakana (カタカナ)
+Used primarily for foreign loanwords, scientific terms, and emphasis in Japanese text.
+
+### Kanji (漢字)
+Chinese characters adopted for Japanese writing, representing concepts rather than sounds.
+
+## 🚀 Technologies Used
+
+- React 19
+- Chakra UI 3
+- React Router 7
+- Speech Synthesis API
+- Vite
+
+## 🔧 Development
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Access
+- Hosted at [Learn-kana](https://sqvish99.github.io/learn-kana/#/)
