@@ -32,11 +32,5 @@ Chinese characters adopted for Japanese writing, representing concepts rather th
 - Speech Synthesis API
 - Vite
 
-## 🔧 Development
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-
 ### Access
 - Hosted at [Learn-kana](https://sqvish99.github.io/learn-kana/#/)
