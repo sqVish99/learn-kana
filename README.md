@@ -2,7 +2,7 @@
 
 A modern, interactive web application for learning Japanese writing systems: Hiragana, Katakana, and Kanji.
 
-![Screenshot of LearnKana](screenshot.png)
+![Screenshot of LearnKana](src/assets/screenshot.png)
 
 ## 🌟 Features
 
