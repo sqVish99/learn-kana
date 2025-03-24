@@ -76,7 +76,7 @@ const Home = () => {
     }, [fullText, index, isDeleting, messageIndex]);
 
     return (
-        <Container maxW="container.xl" py={10}>
+        <Container maxW="100vw" py={10}>
             <VStack spacing={8} align="center" justify="center" minH="70vh">
                 <Box textAlign="center">
                     <Heading

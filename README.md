@@ -2,12 +2,11 @@
 
 A modern, interactive web application for learning Japanese writing systems: Hiragana, Katakana, and Kanji.
 
-![Screenshot of LearnKana](src/assets/screenshot.png)
+![Screenshot of LearnKana](src/assets/images/screenshot.png)
 
 ## 🌟 Features
 
 - **Progressive Learning**: Practice with 10 randomly selected characters at a time
-- **Interactive Quizzes**: Choose the correct character from multiple options
 - **Audio Pronunciation**: Hear the correct pronunciation of each character
 - **Responsive Design**: Works on desktop and mobile devices
 - **Dark Mode Support**: Switch between light and dark themes

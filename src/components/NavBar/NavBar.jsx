@@ -11,8 +11,8 @@ import {
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import "./NavBar.css";
 import NavItem from "../NavItem/NavItem";
-import KanaLight from "../../assets/kana.svg";
-import KanaDark from "../../assets/kanadark.svg";
+import KanaLight from "../../assets/images/kana.svg";
+import KanaDark from "../../assets/images/kanadark.svg";
 import { ColorModeButton, useColorMode } from "../ui/color-mode";
 
 const NavBar = () => {
@@ -21,9 +21,9 @@ const NavBar = () => {
 	const showText = useBreakpointValue({ base: false, md: true });
 
 	const navItems = [
-		{ path: "/hiragana", label: showText ? "Hiragana" : "か" },
-		{ path: "/katakana", label: showText ? "Katakana" : "カ" },
-		{ path: "/kanji", label: showText ? "Kanji" : "日" },
+		{ path: "/hiragana", label: showText ? "Hiragana" : "あ" },
+		{ path: "/katakana", label: showText ? "Katakana" : "ア" },
+		{ path: "/kanji", label: showText ? "Kanji" : "漢" },
 	];
 
 	const isActive = (path) => {

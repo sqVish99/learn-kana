@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-	Container,
-	Text,
-	SimpleGrid,
-	VStack,
-	HStack,
-	Button,
-	Heading,
-	Box,
-} from "@chakra-ui/react";
-import { toaster } from "@/components/ui/toaster";
+import { Container, Text, SimpleGrid, VStack, HStack } from "@chakra-ui/react";
 import hiraganaData from "@/data/hiraganaData";
 import EnhancedTextToSpeech from "@/components/TextToSpeech/TextToSpeech";
 import OptionTile from "@/components/OptionTile/OptionTile";
 import { useNavigate } from "react-router-dom";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import { generateOptions, generatePracticeSet } from "@/utils";
+import PracticeComplete from "@/components/PracticeComplete/PracticeComplete";
+import useOptionSelect from "@/components/UseOptionSelect/UseOptionSelect";
 
 const PRACTICE_SET_SIZE = 10;
 
@@ -23,29 +16,24 @@ const Hiragana = () => {
 	const [currentPracticeSet, setCurrentPracticeSet] = useState([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [options, setOptions] = useState([]);
-	const [isCorrect, setIsCorrect] = useState(null);
 	const [practiceComplete, setPracticeComplete] = useState(false);
+
+	const { isCorrect, handleOptionSelect } = useOptionSelect(
+		currentPracticeSet,
+		currentIndex,
+		setCurrentIndex,
+		setPracticeComplete,
+		1500
+	);
 
 	const handleBackClick = () => {
 		navigate("/");
 	};
 
 	const generateNewPracticeSet = () => {
-		const shuffledData = [...hiraganaData];
-
-		for (let i = shuffledData.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[shuffledData[i], shuffledData[j]] = [
-				shuffledData[j],
-				shuffledData[i],
-			];
-		}
-
-		const newSet = shuffledData.slice(0, PRACTICE_SET_SIZE);
-
+		const newSet = generatePracticeSet(hiraganaData, PRACTICE_SET_SIZE);
 		setCurrentPracticeSet(newSet);
 		setCurrentIndex(0);
-		setIsCorrect(null);
 		setPracticeComplete(false);
 	};
 
@@ -53,79 +41,10 @@ const Hiragana = () => {
 		generateNewPracticeSet();
 	}, []);
 
-	const generateOptions = (correctChar) => {
-		let incorrectOptions = [];
-
-		const optionsPool = hiraganaData.filter(
-			(char) => char.character !== correctChar.character
-		);
-
-		while (incorrectOptions.length < 3) {
-			const randomIndex = Math.floor(Math.random() * optionsPool.length);
-			if (!incorrectOptions.includes(optionsPool[randomIndex])) {
-				incorrectOptions.push(optionsPool[randomIndex]);
-			}
-		}
-
-		const allOptions = [correctChar, ...incorrectOptions];
-		return shuffleArray(allOptions);
-	};
-
-	const shuffleArray = (array) => {
-		const newArray = [...array];
-		let currentIndex = newArray.length;
-		let randomIndex;
-
-		while (currentIndex !== 0) {
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex--;
-
-			[newArray[currentIndex], newArray[randomIndex]] = [
-				newArray[randomIndex],
-				newArray[currentIndex],
-			];
-		}
-
-		return newArray;
-	};
-
-	const handleOptionSelect = (selectedChar) => {
-		const currentChar = currentPracticeSet[currentIndex];
-		const correct = selectedChar.character === currentChar.character;
-		setIsCorrect(correct);
-
-		if (correct) {
-			toaster.success({
-				title: "Correct!",
-				description: `That's right! ${selectedChar.character} is ${selectedChar.romaji}`,
-				duration: 1500,
-			});
-
-			setTimeout(() => {
-				if (currentIndex === currentPracticeSet.length - 1) {
-					setPracticeComplete(true);
-				} else {
-					setCurrentIndex((prevIndex) => prevIndex + 1);
-				}
-				setIsCorrect(null);
-			}, 1500);
-		} else {
-			toaster.error({
-				title: "Try again",
-				description: "That's not the right character",
-				duration: 1500,
-			});
-
-			setTimeout(() => {
-				setIsCorrect(null);
-			}, 1500);
-		}
-	};
-
 	useEffect(() => {
 		if (currentPracticeSet.length > 0 && !practiceComplete) {
 			const currentChar = currentPracticeSet[currentIndex];
-			setOptions(generateOptions(currentChar));
+			setOptions(generateOptions(currentChar, hiraganaData));
 		}
 	}, [currentIndex, currentPracticeSet, practiceComplete]);
 
@@ -139,31 +58,12 @@ const Hiragana = () => {
 
 	if (practiceComplete) {
 		return (
-			<Container width="100vw" maxW="100vw" p={0}>
-				<VStack spacing={8} gap={8}>
-					<PageHeader
-						title="Practice Complete!"
-						onBackClick={handleBackClick}
-					/>
-
-					<Box p={8} textAlign="center">
-						<Heading size="lg" mb={4}>
-							Great job! You've practiced {PRACTICE_SET_SIZE}{" "}
-							hiragana characters.
-						</Heading>
-						<Text mb={8}>
-							Would you like to practice another set?
-						</Text>
-						<Button
-							colorScheme="teal"
-							size="lg"
-							onClick={generateNewPracticeSet}
-						>
-							Practice Another Set
-						</Button>
-					</Box>
-				</VStack>
-			</Container>
+			<PracticeComplete
+				title="Practice Complete!"
+				message={`Great job! You've practiced ${PRACTICE_SET_SIZE} hiragana characters.`}
+				onBackClick={handleBackClick}
+				onRetryClick={generateNewPracticeSet}
+			/>
 		);
 	}
 
