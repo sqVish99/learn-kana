@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Text, Link, Flex } from "@chakra-ui/react";
 import { FaLinkedin } from "react-icons/fa";
+import { useColorMode } from "../ui/color-mode";
 
 const Footer = () => {
+	const { colorMode } = useColorMode();
 	return (
 		<Box
 			as="footer"
@@ -14,12 +16,11 @@ const Footer = () => {
 			shadow="md"
 		>
 			<Flex justify="center" align="center" display="flex" gap={2}>
-				<Text fontSize="sm">
+				<Text fontSize="sm" color={colorMode === "light" ? "black" : "white"}>
 					Built with ❤️ by{" "}
 					<Link
-						href="https://github.com/sqvish99"
+						href="https://sqvish99.github.io/vishwas-portfolio"
 						isExternal
-						color="teal.200"
 						_hover={{ textDecoration: "underline" }}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -30,13 +31,12 @@ const Footer = () => {
 				<Link
 					href="https://www.linkedin.com/in/vishwas-m-h/"
 					isExternal
-					color="teal.200"
 					_hover={{ scale: "1.1" }}
 					target="_blank"
 					rel="noopener noreferrer"
                     _focus={{ outline: "none" }}
 				>
-					<FaLinkedin style={{ marginLeft: "10px" }} />
+					<FaLinkedin />
 				</Link>
 			</Flex>
 		</Box>

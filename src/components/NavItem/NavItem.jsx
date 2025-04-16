@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Box, Flex, Heading, HStack, Link } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import { Link as RouterLink } from 'react-router-dom';
 
 const NavItem = ({ to, children, isActive }) => (
